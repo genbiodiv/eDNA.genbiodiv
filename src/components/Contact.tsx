@@ -30,7 +30,7 @@ export default function Contact({ lang }: ContactProps) {
   };
 
   const textPrimary = {
-    es: '¿Tienes preguntas sobre el curso, requieres asesoramiento en muestreos de campo, tecnicas en genomica o te gustaría proponer una pasantia o tesis de pregrado/ maestria? Escríbenos directamente.',
+    es: '¿Tienes preguntas sobre el curso, requieres asesoría en muestreo de campo o técnicas genómicas, o te gustaría proponer una pasantía o tesis de pregrado/maestría? Escríbenos directamente.',
     en: 'Do you have questions about the course, require advice on field sampling or genomic techniques, or would you like to propose an internship or undergraduate/Master\'s thesis? Write to us directly.'
   };
 
