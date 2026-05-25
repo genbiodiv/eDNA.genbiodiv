@@ -1,0 +1,6 @@
+{
+  "name": "ADN Ambiental GenBioDiv",
+  "description": "Portal académico y operativo para el estudio de ADN ambiental (eDNA) del grupo GenBioDiv de la Universidad del Norte, Barranquilla, Colombia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
