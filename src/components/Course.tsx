@@ -163,27 +163,32 @@ export default function Course({ lang }: CourseProps) {
           <h2 id="course-section-title" className="mt-2 font-display font-medium text-slate-900 dark:text-white text-2xl sm:text-3xl tracking-tight">
             {courseTitle[lang]}
           </h2>
-          <p className="mt-3 text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed text-justify">
+          <p className="mt-3 text-slate-500 dark:text-slate-404 text-xs sm:text-sm leading-relaxed text-justify">
             {courseDesc[lang]}
           </p>
         </div>
 
         {/* 3-day Interactive Syllabus Block */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start font-sans">
+        <div className="mt-12 space-y-6 font-sans">
           
-          {/* Day selection tabs */}
-          <div className="lg:col-span-5 flex flex-col gap-3">
+          {/* Day selection tabs - 3 boxes side-by-side */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {courseDays.map((day) => {
               const isActive = selectedDay === day.id;
+              const dateLabel = day.id === 'day1' ? (lang === 'es' ? 'Mayo 27' : 'May 27') :
+                                day.id === 'day2' ? (lang === 'es' ? 'Mayo 28' : 'May 28') :
+                                (lang === 'es' ? 'Mayo 29' : 'May 29');
+              const displayTitle = day.title[lang].split(' • ')[1] || day.title[lang];
+              
               return (
                 <button
                   id={`course-day-tab-${day.id}`}
                   key={day.id}
                   onClick={() => setSelectedDay(day.id as any)}
-                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-start gap-4 ${
+                  className={`w-full text-left p-5 rounded-2xl border transition-all flex items-start gap-4 cursor-pointer h-full ${
                     isActive 
                       ? 'border-blue-900 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/20 card-shadow' 
-                      : 'border-slate-205 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-850'
+                      : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700'
                   }`}
                 >
                   <span className={`p-2.5 rounded-xl flex-shrink-0 ${
@@ -194,47 +199,20 @@ export default function Course({ lang }: CourseProps) {
                     <Calendar className="w-5 h-5" />
                   </span>
                   <div className="space-y-1 overflow-hidden">
-                    <span className="text-[10px] font-mono tracking-wider font-semibold text-blue-900 dark:text-blue-400 uppercase">
-                      {lang === 'es' ? 'MÓDULO DE APRENDIZAJE' : 'CURRICULUM MODULE'}
+                    <span className="text-sm font-semibold text-blue-900 dark:text-blue-400 block font-display">
+                      {dateLabel}
                     </span>
-                    <h3 className="font-display font-medium text-slate-900 dark:text-white text-sm sm:text-base truncate">
-                      {day.title[lang]}
+                    <h3 className="font-display font-medium text-slate-900 dark:text-white text-sm sm:text-base leading-snug">
+                      {displayTitle}
                     </h3>
                   </div>
                 </button>
               );
             })}
-
-            {/* Quick notice of enrollment */}
-            <div className="p-5 bg-blue-50/50 dark:bg-blue-950/25 rounded-2xl border border-blue-100 dark:border-blue-900/60 text-xs space-y-3 mt-4 flex flex-col justify-between">
-              <div className="space-y-2">
-                <span className="font-display font-semibold text-slate-850 dark:text-slate-200 flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-blue-900 dark:text-blue-400" />
-                  <span>{lang === 'es' ? 'Certificación Uninorte' : 'Uninorte Certification'}</span>
-                </span>
-                <p className="text-slate-600 dark:text-slate-350 text-xs text-justify font-sans leading-relaxed">
-                  {lang === 'es'
-                    ? 'El curso está auspiciado por el Departamento de Química y Biología de la Universidad del Norte. Los asistentes reciben un certificado de entrenamiento molecular oficial tras finalizar el curso de forma satisfactoria.'
-                    : 'The course is sponsored by the Department of Chemistry and Biology at Universidad del Norte. Attendees receive an official molecular training certificate upon successful completion.'}
-                </p>
-              </div>
-              <div className="pt-1.5">
-                <a
-                  id="uninorte-marketplace-inscription-link"
-                  href="https://tananeo.uninorte.edu.co/marketplace/servicios/cursodeintroduccionaladnambiental"
-                  target="_blank"
-                  rel="noreferrer referrer"
-                  className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-900 hover:bg-blue-950 dark:bg-blue-800 dark:hover:bg-blue-700 text-white font-semibold rounded-xl text-[10.5px] tracking-tight transition-all shadow-sm active:scale-[0.985]"
-                >
-                  <span>{lang === 'es' ? 'Ver Inscripciones (Marketplace)' : 'View Registration Info (Marketplace)'}</span>
-                  <ExternalLink className="w-3 h-3 text-white" />
-                </a>
-              </div>
-            </div>
           </div>
 
-          {/* Active module details content */}
-          <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 card-shadow">
+          {/* Active module details content - full-width underneath */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 card-shadow w-full">
             <div className="space-y-1.5 border-b border-slate-200 dark:border-slate-800 pb-4">
               <span id="course-active-day-label" className="text-[10px] font-mono tracking-widest text-blue-900 dark:text-blue-400 font-bold uppercase">
                 {lang === 'es' ? 'Contenido Seleccionado' : 'Active Curricular Unit'}
@@ -242,7 +220,7 @@ export default function Course({ lang }: CourseProps) {
               <h3 id="course-active-day-title" className="font-display font-medium text-slate-900 dark:text-white text-lg sm:text-xl">
                 {activeDayData.title[lang]}
               </h3>
-              <p id="course-active-day-sub" className="text-xs text-slate-500 dark:text-slate-404 leading-relaxed text-justify">
+              <p id="course-active-day-sub" className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
                 {activeDayData.subtitle[lang]}
               </p>
             </div>
@@ -252,13 +230,13 @@ export default function Course({ lang }: CourseProps) {
               <span className="text-[10px] font-mono tracking-wider font-semibold text-slate-400 uppercase block">
                 {lang === 'es' ? 'ACTIVIDADES CLAVE DEL BLOQUE' : 'CORE LESSONS & EXERCIZES'}
               </span>
-              <div className="grid grid-cols-1 gap-3.5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                 {activeDayData.activities[lang].map((activity, idx) => {
                   const rPoint = findReferencedMapPoint(activity);
                   return (
                     <div 
                       key={idx} 
-                      className="flex flex-col gap-2.5 p-3.5 bg-slate-50 dark:bg-slate-950/40 rounded-xl border border-slate-150 dark:border-slate-850 hover:border-blue-300 dark:hover:border-blue-955 transition-colors"
+                      className="flex flex-col gap-2.5 p-3.5 bg-slate-50 dark:bg-slate-950/40 rounded-xl border border-slate-150 dark:border-slate-850 hover:border-blue-300 dark:hover:border-blue-900 transition-colors"
                     >
                       <div className="flex items-start gap-3">
                         <CheckCircle2 className="w-4 h-4 text-green-700 dark:text-green-400 mt-1 flex-shrink-0" />
@@ -290,7 +268,7 @@ export default function Course({ lang }: CourseProps) {
         </div>
 
         {/* Interactive Google Map & Campus Directory Section */}
-        <div id="uninorte-location-section" className="mt-16 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden bg-slate-50/50 dark:bg-slate-950/25">
+        <div id="uninorte-location-section" className="mt-16 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden bg-slate-50/50 dark:bg-slate-950/25 animate-fade-in">
           <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
             {/* Left Col: Campus Guide Details & Location Selector buttons */}
@@ -448,7 +426,7 @@ export default function Course({ lang }: CourseProps) {
                       {lang === 'es' ? pointDays.laboratoriosDugand.es : pointDays.laboratoriosDugand.en}
                     </span>
                   </div>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-sans font-medium">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-405 mt-1 font-sans font-medium">
                     {lang === 'es' ? 'Laboratorio de química y biología.' : 'Chemistry and biology laboratory.'}
                   </p>
                 </button>
@@ -497,7 +475,7 @@ export default function Course({ lang }: CourseProps) {
             </div>
 
             {/* Right Col: Interactive Google Maps Iframe Embedded Frame */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-4 font-sans">
               <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 shadow-md flex-1 min-h-[350px] lg:min-h-[420px] flex">
                 <iframe
                   id="google-maps-iframe-embedded"
@@ -528,7 +506,7 @@ export default function Course({ lang }: CourseProps) {
                 {/* Bottom floating overlay details */}
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md p-4 rounded-xl border border-slate-100 dark:border-slate-800 shadow-lg pointer-events-none text-left">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-slate-100 dark:border-slate-800 pb-2 mb-2">
-                    <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide">
+                    <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-405 uppercase tracking-wide">
                       {lang === 'es' ? 'CÓDIGO PLUS / REFERENCIA' : 'PLUS CODE / REFERENCE'}
                     </span>
                     <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
@@ -569,7 +547,7 @@ export default function Course({ lang }: CourseProps) {
             </div>
           </div>
 
-          <div className="mt-8 p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-150 dark:border-slate-850 text-center space-y-3 max-w-md mx-auto shadow-sm">
+          <div className="mt-8 p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-150 dark:border-slate-850 text-center space-y-3 max-w-md mx-auto shadow-sm font-sans">
             <div className="w-12 h-12 bg-blue-50 dark:bg-blue-950/30 rounded-full flex items-center justify-center mx-auto text-blue-900 dark:text-blue-400">
               <FileText className="w-6 h-6 animate-pulse" />
             </div>
@@ -582,6 +560,40 @@ export default function Course({ lang }: CourseProps) {
                   ? 'Todos los recursos del curso y documentos estarán disponibles en los próximos días.'
                   : 'All course resources and training documents will be available here in the coming days.'}
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Uninorte Certification Block at the end */}
+        <div id="uninorte-certification-block" className="mt-16 bg-gradient-to-r from-blue-50/50 to-indigo-50/30 dark:from-blue-950/10 dark:to-indigo-950/10 border border-blue-105 dark:border-blue-900/40 rounded-3xl p-6 md:p-8 font-sans transition-all duration-300 hover:shadow-md">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <span className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-2xl text-blue-900 dark:text-blue-400 flex-shrink-0">
+                <Award className="w-6 h-6" />
+              </span>
+              <div className="space-y-2">
+                <h3 className="font-display font-medium text-slate-900 dark:text-white text-base md:text-lg flex items-center gap-1.5">
+                  <span>{lang === 'es' ? 'Certificación de la Universidad del Norte' : 'Universidad del Norte Certification'}</span>
+                  <Sparkles className="w-4 h-4 text-blue-650 dark:text-blue-400 animate-pulse" />
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-350 text-justify leading-relaxed max-w-3xl">
+                  {lang === 'es'
+                    ? 'El curso está plenamente coordinado y auspiciado por el Departamento de Química y Biología de la Universidad del Norte. Los asistentes reciben un certificado de entrenamiento molecular oficial tras finalizar el curso de forma satisfactoria.'
+                    : 'The course is fully coordinated and sponsored by the Department of Chemistry and Biology at Universidad del Norte. Attendees receive an official molecular training certificate upon successful completion.'}
+                </p>
+              </div>
+            </div>
+            <div className="w-full md:w-auto flex-shrink-0">
+              <a
+                id="uninorte-marketplace-inscription-link"
+                href="https://tananeo.uninorte.edu.co/marketplace/servicios/cursodeintroduccionaladnambiental"
+                target="_blank"
+                rel="noreferrer referrer"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-1.5 px-6 py-3.5 bg-blue-900 hover:bg-blue-950 dark:bg-blue-800 dark:hover:bg-blue-700 text-white font-semibold rounded-2xl text-xs md:text-sm tracking-tight transition-all shadow-sm active:scale-[0.985] text-center"
+              >
+                <span>{lang === 'es' ? 'Ver Inscripciones (Marketplace)' : 'View Registration Info (Marketplace)'}</span>
+                <ExternalLink className="w-3.5 h-3.5 text-white" />
+              </a>
             </div>
           </div>
         </div>
