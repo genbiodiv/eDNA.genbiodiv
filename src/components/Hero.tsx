@@ -44,14 +44,6 @@ export default function Hero({ lang, onOpenGuide }: HeroProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 animate-fade-in">
         
-        {/* Top Mini Academic Badge */}
-        <div className="flex justify-center md:justify-start">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-900 dark:bg-blue-950/50 dark:text-blue-300 border border-blue-200/55 dark:border-blue-905/50 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
-            {t.badgeLabel}
-          </span>
-        </div>
-
         {/* Hero Title & Primary Pitch */}
         <div className="mt-6 text-center md:text-left max-w-4xl">
           <h1 className="font-display font-medium text-slate-900 dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight">

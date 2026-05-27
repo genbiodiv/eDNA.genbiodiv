@@ -5,7 +5,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-import Hero from './components/Hero';
 import Course from './components/Course';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -16,12 +15,12 @@ export default function App() {
   const [lang, setLang] = useState<Language>('es');
   const [dark, setDark] = useState<boolean>(false);
   const [guideOpen, setGuideOpen] = useState<boolean>(false); // Guide is closed by default. No automatic splash popup.
-  const [currentHash, setCurrentHash] = useState<string>(window.location.hash || '#inicio');
+  const [currentHash, setCurrentHash] = useState<string>(window.location.hash || '#curso');
 
   // Listen to hash changes for sub-page routing setup
   useEffect(() => {
     const handleHashChange = () => {
-      setCurrentHash(window.location.hash || '#inicio');
+      setCurrentHash(window.location.hash || '#curso');
       window.scrollTo(0, 0);
     };
     window.addEventListener('hashchange', handleHashChange);
@@ -33,16 +32,18 @@ export default function App() {
     const savedDark = localStorage.getItem('genbiodiv-theme-dark');
     if (savedDark === 'true') {
       setDark(true);
-    } else if (savedDark === 'false') {
-      setDark(false);
     } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setDark(prefersDark);
+      setDark(false);
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('genbiodiv-theme-dark', dark.toString());
+    if (dark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [dark]);
 
   const handleCloseGuide = () => {
@@ -66,11 +67,8 @@ export default function App() {
       {/* Main Container Pages with clean fade-in entry transition */}
       <main className="flex-1">
         <div key={currentHash} className="animate-fade-in">
-          {currentHash === '#curso' && <Course lang={lang} />}
+          {(currentHash === '#curso' || !['#contacto'].includes(currentHash)) && <Course lang={lang} />}
           {currentHash === '#contacto' && <Contact lang={lang} />}
-          {(!['#curso', '#contacto'].includes(currentHash)) && (
-            <Hero lang={lang} onOpenGuide={handleOpenGuide} />
-          )}
         </div>
       </main>
 

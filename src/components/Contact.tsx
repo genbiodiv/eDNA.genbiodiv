@@ -47,15 +47,27 @@ export default function Contact({ lang }: ContactProps) {
   };
 
   return (
-    <section id="contacto" className="relative overflow-hidden py-16 bg-slate-50/50 dark:bg-slate-950/40 bg-pattern border-b border-slate-200/50 dark:border-slate-850/50 transition-all animate-fade-in">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contacto" className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-950 bg-pattern py-16 md:py-24 border-b border-slate-200/65 dark:border-slate-850/65 transition-colors">
+      
+      {/* Subtle organic shapes background to signify DNA and Water */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10 dark:opacity-5">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid-contact" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-slate-350 dark:text-slate-750" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-contact)" />
+          {/* Wave line */}
+          <path d="M -100 200 C 200 100, 300 300, 700 150 C 1000 50, 1200 400, 1600 250" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-blue-900" />
+          <path d="M -100 250 C 150 150, 400 350, 800 200 C 1100 100, 1300 450, 1700 300" fill="none" stroke="currentColor" strokeWidth="1" className="text-emerald-700" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 animate-fade-in">
         
         {/* Section Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-mono font-semibold tracking-wider text-blue-900 dark:text-blue-400 uppercase flex items-center gap-1.5">
-            <Mail className="w-4 h-4" />
-            <span>{lang === 'es' ? 'CANAL DE COMUNICACIÓN' : 'COMMUNICATION PORT'}</span>
-          </span>
           <h2 id="contact-section-title" className="mt-2 font-display font-medium text-slate-900 dark:text-white text-2xl sm:text-3xl tracking-tight">
             {titleText[lang]}
           </h2>

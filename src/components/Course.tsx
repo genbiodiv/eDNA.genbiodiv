@@ -151,15 +151,27 @@ export default function Course({ lang }: CourseProps) {
   const activeDayData = courseDays.find(d => d.id === selectedDay)!;
 
   return (
-    <section id="curso" className="py-16 bg-white dark:bg-slate-900 border-b border-slate-200/50 dark:border-slate-800/50 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="curso" className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-950 bg-pattern py-16 md:py-24 border-b border-slate-200/65 dark:border-slate-850/65 transition-colors">
+      
+      {/* Subtle organic shapes background to signify DNA and Water */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-10 dark:opacity-5">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid-course" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-slate-350 dark:text-slate-750" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-course)" />
+          {/* Wave line */}
+          <path d="M -100 200 C 200 100, 300 300, 700 150 C 1000 50, 1200 400, 1600 250" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-blue-900" />
+          <path d="M -100 250 C 150 150, 400 350, 800 200 C 1100 100, 1300 450, 1700 300" fill="none" stroke="currentColor" strokeWidth="1" className="text-emerald-700" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="max-w-3xl animate-fade-in">
-          <span className="text-xs font-mono font-semibold tracking-wider text-blue-900 dark:text-blue-400 uppercase flex items-center gap-1.5">
-            <GraduationCap className="w-4 h-4" />
-            <span>{lang === 'es' ? 'FORMACIÓN ACADÉMICA' : 'ACADEMIC TRAINING'}</span>
-          </span>
           <h2 id="course-section-title" className="mt-2 font-display font-medium text-slate-900 dark:text-white text-2xl sm:text-3xl tracking-tight">
             {courseTitle[lang]}
           </h2>
@@ -274,10 +286,6 @@ export default function Course({ lang }: CourseProps) {
             {/* Left Col: Campus Guide Details & Location Selector buttons */}
             <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
               <div>
-                <span className="text-[10px] font-mono font-bold tracking-wider text-blue-900 dark:text-blue-400 uppercase flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-blue-900 dark:text-blue-400" />
-                  <span>{lang === 'es' ? 'MAPA INTERACTIVO Y ACCESO DE ESTUDIANTES' : 'GOOGLE MAPS & CAMPUS ACCESS'}</span>
-                </span>
                 <h3 className="mt-2 font-display font-medium text-slate-900 dark:text-white text-xl tracking-tight">
                   {lang === 'es' ? 'Ubicación de Salones y Puertas de Acceso' : 'Uninorte Room & Gate Directory'}
                 </h3>

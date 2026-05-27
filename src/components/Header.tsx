@@ -25,7 +25,6 @@ export default function Header({ lang, setLang, dark, setDark, currentHash }: He
   };
 
   const menuItems = [
-    { name: t.navStart, href: '#inicio' },
     { name: t.navCourse, href: '#curso' },
     { name: t.navContact, href: '#contacto' },
   ];
@@ -36,15 +35,15 @@ export default function Header({ lang, setLang, dark, setDark, currentHash }: He
         <div className="flex justify-between items-center h-16">
           
           {/* Logo Brand */}
-          <a href="#inicio" className="flex items-center gap-2.5 group">
+          <a href="#curso" className="flex items-center gap-2.5 group">
             <span className="p-2 bg-blue-900 dark:bg-blue-850 rounded-xl text-white transition-transform group-hover:scale-105">
               <Dna className="w-5 h-5" />
             </span>
             <div className="flex flex-col">
-              <span className="font-display font-medium text-blue-950 dark:text-white text-base leading-none tracking-tight uppercase">
-                GenBioDiv
+              <span className="font-display font-semibold text-blue-950 dark:text-white text-xs sm:text-sm md:text-base leading-tight tracking-tight">
+                Genómica y Biodiversidad del Caribe Colombiano
               </span>
-              <span className="text-[10px] font-sans font-semibold text-slate-500 dark:text-slate-400 mt-1 tracking-widest leading-none uppercase">
+              <span className="text-[10px] font-sans font-semibold text-slate-500 dark:text-slate-400 mt-0.5 tracking-wider leading-none uppercase">
                 Universidad del Norte
               </span>
             </div>
@@ -53,7 +52,7 @@ export default function Header({ lang, setLang, dark, setDark, currentHash }: He
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1.5">
             {menuItems.map((item) => {
-              const isActive = item.href === currentHash || (item.href === '#inicio' && !['#curso', '#contacto'].includes(currentHash));
+              const isActive = item.href === currentHash || (item.href === '#curso' && !['#contacto'].includes(currentHash));
               return (
                 <a
                   key={item.href}
@@ -95,12 +94,13 @@ export default function Header({ lang, setLang, dark, setDark, currentHash }: He
           </div>
 
           {/* Mobile Right Controls - Hamburger + Toggles combo */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1">
             {/* Minimal Mobile Lang Toggle */}
             <button
               id="mobile-lang-toggle"
               onClick={toggleLanguage}
-              className="p-1.5 text-xs font-semibold rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] text-xs font-semibold rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
+              aria-label="Toggle language"
             >
               {lang === 'es' ? 'EN' : 'ES'}
             </button>
@@ -109,16 +109,18 @@ export default function Header({ lang, setLang, dark, setDark, currentHash }: He
             <button
               id="mobile-dark-toggle"
               onClick={() => setDark(!dark)}
-              className="p-1.5 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
+              aria-label="Toggle dark mode"
             >
-              {dark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-500" />}
+              {dark ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-500" />}
             </button>
 
             {/* Menu main button */}
             <button
               id="menu-trigger-btn"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
+              className="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
+              aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -130,24 +132,53 @@ export default function Header({ lang, setLang, dark, setDark, currentHash }: He
       {/* Mobile Drawer */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 transition-colors">
-          <div className="px-4 pt-2 pb-4 space-y-1">
-            {menuItems.map((item) => {
-              const isActive = item.href === currentHash || (item.href === '#inicio' && !['#curso', '#contacto'].includes(currentHash));
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block px-4 py-2.5 text-sm rounded-lg transition-all ${
-                    isActive
-                      ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 font-semibold'
-                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900'
-                  }`}
+          <div className="px-4 pt-2 pb-4 space-y-3">
+            <div className="space-y-1">
+              {menuItems.map((item) => {
+                const isActive = item.href === currentHash || (item.href === '#curso' && !['#contacto'].includes(currentHash));
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-4 py-2.5 text-sm rounded-lg transition-all ${
+                      isActive
+                        ? 'bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 font-semibold'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Quick Action Drawer Controls */}
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-3 px-4 flex items-center justify-between gap-4">
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                {lang === 'es' ? 'Preferencias' : 'Preferences'}
+              </span>
+              <div className="flex items-center gap-2">
+                {/* Language switch */}
+                <button
+                  id="drawer-lang-toggle"
+                  onClick={toggleLanguage}
+                  className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-slate-700 dark:text-slate-300 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200/50 dark:border-slate-800/85 min-w-[44px] min-h-[44px] shadow-sm active:scale-95 transition-all"
                 >
-                  {item.name}
-                </a>
-              );
-            })}
+                  <Globe className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                  <span>{lang === 'es' ? 'EN' : 'ES'}</span>
+                </button>
+
+                {/* Dark Mode switch */}
+                <button
+                  id="drawer-dark-toggle"
+                  onClick={() => setDark(!dark)}
+                  className="flex items-center justify-center p-2.5 rounded-xl text-slate-700 dark:text-slate-300 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200/50 dark:border-slate-800/85 min-w-[44px] min-h-[44px] shadow-sm active:scale-95 transition-all"
+                >
+                  {dark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-500" />}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

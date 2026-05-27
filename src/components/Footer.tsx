@@ -31,23 +31,13 @@ export default function Footer({ lang }: FooterProps) {
                 <Dna className="w-5 h-5" />
               </span>
               <div className="flex flex-col">
-                <span className="font-display font-medium text-white text-base leading-none tracking-tight">
-                  GenBioDiv
+                <span className="font-display font-semibold text-white text-sm sm:text-base leading-tight tracking-tight">
+                  Genómica y Biodiversidad del Caribe Colombiano
                 </span>
-                <span className="text-[10px] font-mono tracking-wider text-blue-405 mt-1 uppercase">
+                <span className="text-[10px] font-mono tracking-wider text-blue-400 mt-1 uppercase">
                   Universidad del Norte
                 </span>
               </div>
-            </div>
-            
-            <p className="text-xs text-slate-400 leading-relaxed">
-              {lang === 'es'
-                ? 'ADN ambiental, biodiversidad y monitoreo molecular ecológico en el Caribe colombiano y otros ecosistemas comparativos.'
-                : 'Environmental DNA, biological diversity, and molecular surveillance inside the Colombian Caribbean and equivalent baselines.'}
-            </p>
-
-            <div className="text-[10px] font-mono text-slate-500 space-y-0.5">
-               <p>Barranquilla, Colombia</p>
             </div>
           </div>
 
