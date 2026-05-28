@@ -117,24 +117,19 @@ export default function Contact({ lang }: ContactProps) {
 
           </div>
 
-          {/* Right Panel: Embedded Forms Iframe inside a beautiful frame */}
-          <div className="lg:col-span-8 bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-855 rounded-3xl p-4 md:p-6 card-shadow flex flex-col">
-
-            {/* Responsive Iframe Container */}
-            <div className="w-full bg-slate-50/50 dark:bg-slate-950/30 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-850 flex flex-col">
-              <iframe 
-                width="100%" 
-                height="560px" 
-                src="https://forms.office.com/Pages/ResponsePage.aspx?id=ebawul-96E-1Fsa4sxfHgvvmFHSwR-9PjGxGDJKZ9ilUODRGUkhaOE9YOFRBTktKREJCQkJKM09XVC4u&embed=true" 
-                frameBorder={0} 
-                marginWidth={0} 
-                marginHeight={0} 
-                className="w-full h-[560px]"
-                style={{ border: 'none', maxWidth: '100%', minHeight: '520px' }} 
-                allowFullScreen
-              />
-            </div>
-
+          {/* Right Panel: Embedded Forms Iframe */}
+          <div className="lg:col-span-8 bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-855 rounded-3xl overflow-hidden card-shadow">
+            <iframe 
+              width="100%" 
+              height="560px" 
+              src="https://forms.office.com/Pages/ResponsePage.aspx?id=ebawul-96E-1Fsa4sxfHgvvmFHSwR-9PjGxGDJKZ9ilUODRGUkhaOE9YOFRBTktKREJCQkJKM09XVC4u&embed=true" 
+              frameBorder={0} 
+              marginWidth={0} 
+              marginHeight={0} 
+              className="w-full h-[560px]"
+              style={{ border: 'none', maxWidth: '100%', minHeight: '520px' }} 
+              allowFullScreen
+            />
           </div>
 
         </div>
