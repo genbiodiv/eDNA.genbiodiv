@@ -119,20 +119,6 @@ export default function Contact({ lang }: ContactProps) {
 
           {/* Right Panel: Embedded Forms Iframe inside a beautiful frame */}
           <div className="lg:col-span-8 bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-855 rounded-3xl p-4 md:p-6 card-shadow flex flex-col">
-            
-            {/* Mini label indicator */}
-            <div className="px-1.5 mb-4 flex items-center justify-between">
-              <div>
-                <span className="text-[9px] font-mono tracking-widest text-emerald-800 dark:text-emerald-400 font-bold block uppercase mb-0.5">
-                  {lang === 'es' ? 'Formulario de Entrada' : 'Entry Form'}
-                </span>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {lang === 'es' 
-                    ? 'Por favor, diligencia el siguiente formulario académico para registrarte.' 
-                    : 'Please fill out the following academic form to register.'}
-                </p>
-              </div>
-            </div>
 
             {/* Responsive Iframe Container */}
             <div className="w-full bg-slate-50/50 dark:bg-slate-950/30 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-850 flex flex-col">
